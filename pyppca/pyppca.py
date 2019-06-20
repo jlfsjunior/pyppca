@@ -32,8 +32,8 @@ def ppca(Y, d, dia):
         dia: (boolean) if True: print objective each step
 
     Returns:
-        ss: ( float ) isotropic variance outside subspace
         C:  (D by d ) C*C' + I*ss is covariance model, C has scaled principal directions as cols
+        ss: ( float ) isotropic variance outside subspace
         M:  (D by 1 ) data mean
         X:  (N by d ) expected states
         Ye: (N by D ) expected complete observations (differs from Y if data is missing)
