@@ -91,7 +91,7 @@ def ppca(Y, d, dia):
         if rel_ch < threshold and count > 5:
             count = 0
         if dia:
-            print('Objective: %.2f, Relative Change %.5f' % (objective, rel_ch))
+            print(f"Objective: {objective:.2f}, Relative Change {rel_ch:.5f}")
 
     C = orth(C)
     covM = cov((Ye @ C).T)
