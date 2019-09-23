@@ -6,6 +6,7 @@ from pyppca import ppca
 class TestPpca(TestCase):
 
     def setUp(self) -> None:
+        """Creates some data to use in test(s) below"""
         n_dims = 10
         n_obs = 10000
         missing_rate = .0001
@@ -34,23 +35,24 @@ class TestPpca(TestCase):
         }
 
     def test_ppca(self):
+        """Test that imputation of missing data works for PCA"""
         t_all = self.t
         t_masked = self.t_masked
         n_latent = self.n_latent
 
         C, ss, M, X, Ye = ppca(Y=t_masked, d=n_latent, dia=False)
 
-        mean_abs_err = M-self.true['M']
-        mean_rel_err = np.abs(M/self.true['M']-1)
+        mean_abs_err = M - self.true['M']
+        mean_rel_err = np.abs(M / self.true['M'] - 1)
 
-        self.assertLessEqual((mean_abs_err > 1).sum(),M.size*.1,"Absolute error in mean larger than 1 in more than 90% of cares")
-        self.assertLessEqual((mean_rel_err > .05).sum(),M.size*.1,f"Relative error in mean larger than 5% in more than 90% of cases.")
+        self.assertLessEqual((mean_abs_err > 1).sum(), M.size * .1,
+                             "Absolute error in mean larger than 1 in more than 90% of cases")
+        self.assertLessEqual((mean_rel_err > .05).sum(), M.size * .1,
+                             f"Relative error in mean larger than 5% in more than 90% of cases.")
 
         imputation_abs_err = Ye - t_all
-        imputation_rel_err = np.abs(Ye/t_all-1)
+        imputation_rel_err = np.abs(Ye / t_all - 1)
         self.assertLessEqual((imputation_abs_err > 1).sum(), Ye.size * .1,
                              "Absolute error in imputation larger than 1 in more than 90% of cares")
         self.assertLessEqual((imputation_rel_err > .01).sum(), Ye.size * .1,
                              f"Relative error in imputation larger than 5% in more than 90% of cases.")
-
-        #print(np.histogram(imputation_rel_err))

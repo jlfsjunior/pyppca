@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyppca",
-    version="0.0.4",
-    author="Sheridan Green",
-    author_email="sheridan.green@yale.edu",
+    version="0.0.5",
+    author="Ludvig Hult",
+    author_email="ludvig.hult@gmail.com",
     description="Probabilistic PCA with Missing Values",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/shergreen/pyppca",
+    url="https://github.com/el-hult/pyppca",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
